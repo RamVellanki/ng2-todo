@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AngularFire, FirebaseObjectObservable, FirebaseListObservable } from 'angularfire2';
+
 import { TodoserviceService } from './todoservice.service';
 import { TODO } from "app/todo";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-root',
@@ -8,18 +11,36 @@ import { TODO } from "app/todo";
   styleUrls: ['./app.component.css'],
   providers: [TodoserviceService]
 })
-export class AppComponent {
-  todoData: TODO[];
+export class AppComponent implements OnInit {
+  todoData: FirebaseListObservable<any[]>;
+  authState: boolean;
   newTodo: String;
-  constructor(private todoService: TodoserviceService) {
-    this.todoData = todoService.getTodos();
-    this.todoData.forEach(function(a){
+  constructor(private todoService: TodoserviceService, public af: AngularFire) {
+    this.todoData = this.af.database.list('/todos');
+    this.todoData.forEach(function (a) {
       console.log(a);
     })
   }
-  onAdd(): void{
+
+  ngOnInit(): void {
+    if (!this.authState) {
+      this.af.auth.login();
+    }
+    this.af.auth.map((auth) => {
+      if (auth == null) {
+        alert("Need to login!");
+        this.authState = false;
+      } else {
+        this.authState = true;
+      }
+    });
+  }
+
+  ngOnDesstroy(): void {
+  }
+  onAdd(): void {
     var todo = new TODO(false, this.newTodo);;
-    this.todoService.addTodo(todo);
+    this.todoData.push(todo);
   }
   title = 'Todo App!';
 }
