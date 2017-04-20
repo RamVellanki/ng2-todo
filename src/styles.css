@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.css';
+@import url("https://fonts.googleapis.com/css?family=Pacifico");
+.todolist>li {
+    cursor: pointer;
+    position: relative;
+    left: 0;
+    background-color: lightgrey;
+    margin: .5em;
+    padding: 5px;
+    border-radius: 4px;
+    list-style: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1,
+h2 {
+    font-family: pacifico;
+}
+
+.todolist {
+    list-style-type: none;
+    width: 15em;
+    padding: 0;
+}
+
+li>button {
+    float: right;
+}
+
+.todocard {
+    height: 400px;
+    width: 400px;
+}
+
+.striketext {
+    text-decoration: line-through;
+}

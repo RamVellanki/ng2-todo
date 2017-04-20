@@ -1,3 +1,25 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+    <h1>
+        {{title}}
+    </h1>
+    <div>
+        <md-input-container>
+            <input mdInput [(ngModel)]="newTodo" placeholder="What you want todo">
+        </md-input-container>
+        <a *ngIf="newTodo" md-mini-fab color="primary" (click)="onAdd()">
+            <md-icon>check</md-icon>
+        </a>
+
+        <h2>Todo List
+            <md-icon>check</md-icon>
+        </h2>
+        <div class="todolist">
+            <li *ngFor="let todo of todoData">
+                <md-checkbox [(ngModel)]="todo.isDone" color="accent">
+                    <div [ngClass]="{'striketext': todo.isDone}">{{todo.description}}</div>
+                </md-checkbox>
+            </li>
+        </div>
+    </div>
+
+</div>
