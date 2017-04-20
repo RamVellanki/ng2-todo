@@ -1,3 +1,5 @@
+For tutorial, please check my blog post [here](http://www.progdotram.com/2017/04/02/Creating-Angular-2-Material-Design-app/)
+
 # Todomaterialapp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.2.
